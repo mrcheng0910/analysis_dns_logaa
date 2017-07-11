@@ -28,7 +28,6 @@ def get_srvs():
             except:
                 srv_num[i[0].lower()] = int(i[1])
     mysql.disconnect()
-
     return srv_num
 
 
@@ -78,7 +77,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-

@@ -103,7 +103,7 @@ def query_reg(srv_regs):
 
 def main():
 
-    # update_reg_data(end_tb=6)
+    # update_reg_data(end_tb=12)
     reg_srv_data = open_data()
     reg_srvs, srv_regs = manage_data(reg_srv_data)
     count_reg_srv(reg_srvs)   # 统计分析

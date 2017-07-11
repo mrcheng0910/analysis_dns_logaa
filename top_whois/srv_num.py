@@ -16,7 +16,7 @@ def get_srvs():
     mysql.connect()
     mysql.select_db('top_whois_srv_com')
     srv_num = {}
-    for table_num in xrange(1, 6):
+    for table_num in xrange(1, 12):
         print 'table: ', str(table_num)
 
         sql = """SELECT sec_whois_server,count(*) FROM domain_whois_com_top_srv_{n} WHERE sec_whois_server!='' AND sec_whois_server!='0' AND sec_whois_server IS NOT NULL GROUP BY sec_whois_server""".format(n=table_num)
@@ -68,15 +68,23 @@ def srv_list(srv_num):
     return srv_num.keys()
 
 
+def save_txt(srvs):
+
+    fp = open('exist_srvs.txt','w')
+
+    for i in srvs:
+        fp.write(i.strip()+'\n')
+
+    fp.close()
+
+
 def main():
     srv_num = get_srvs()  # 从数据库中获取所有服务器名称和域名数量
     save_data(srv_num)  # 持久性存储
     srv_num = open_data()  # 从文件中读取数据
     count_reg_srv(srv_num)   # 统计分析
-    # srvs = srv_list(srv_num)
-    # for i in srvs:
-    #     print i
-
+    srvs = srv_list(srv_num)
+    save_txt(srvs)
 
 if __name__ == '__main__':
     main()
